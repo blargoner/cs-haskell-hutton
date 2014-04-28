@@ -1,3 +1,5 @@
+import Control.Monad
+
 -- lists
 sub :: Eq a => [a] -> [a] -> Bool
 sub xs ys = and [ elem x ys | x <- xs ]
@@ -22,6 +24,10 @@ union (Set xs) = Set (concat [ ys | Set ys <- xs ])
 
 union2 :: Set -> Set -> Set
 union2 x y = union (pair x y)
+
+-- power
+power :: Set -> Set
+power (Set xs) = Set (map Set (filterM (\x -> [False, True]) xs))
 
 -- successor
 successor :: Set -> Set
